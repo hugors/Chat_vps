@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "booming-being-453614-q4",
+  "private_key_id": "7f7130893d46de037ca02c65081c0c61154c1320",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC4dhlCoZuJuxbg\nOS24Gv5pCnRoyrr+vOPrjYS3Xf2lI8U/XYJ+i7Gmveif7Kp8rudaRKrzw3sOy+uK\nhc64lgwuWPjaxj14C/UifHpI0OtIIVBK4aQc7ZKajnjhpQQ/YyTq8EpBHpzltPma\nofbwgJ5USPadB7Ortom/8tMrwqwsJPCn0kOFw/HBYDrTQSMl5Zs/QHoVh79ISeSM\ny+ypiV68MvTcXzoNVB76atkBmvkohMynH4JU8QKxb2ht/rSjV3xsXWYdAE60hfOm\nz/k3zL95fRU/9vj3jeqt8OyTlT+QB72KkFWbMIlH/57pgRBCd1vlU9FMSuXdF5OD\nT9jnC+MrAgMBAAECggEARn5PkgC7tauLhv4jBEBAqLjnmuKbCt36BluLdB4V4IXm\njBw60gylxDDAVVm3H7Yh0QP8BvNWNGXm6oXPZghluFKlK8pl1FpRgK/sdaZtvB+L\nFUrdEncSN0GqXaVYFbdYdPaGkhNWZ4y9dQRfoDKvD0vg/0rhtYYpZ3Mvk4IulSGU\nxC/SIRsIea1ZbIdqBFO9YnWhMCue6TrXUrxF8Q263pBfYbR1+3wO6fMsM0H/GFQP\nCu2J4Bw6fXh9KPX1mZnccAFPWz218Mk2IlN+/XHC28+MEIhZabcemvnKzo+bScTs\nPUPhxbFacJeSFKQ841p+PrdilSBkJbpCVkIyAlCWRQKBgQDaeRzDK6hOy/+0m7A6\niDsYojiuXDeS2jHvpOVnz9Xqbckz9KtuMclehMuSsO5XwolFHbpQ4dbthpABCBbf\nb16V8SOzAhx4gNKsx/mIzTseE29u2MEJxxctP9Zcy+d2TV0JdCLw6uzYaZm2D5Vk\neRCv2UvGKd0KHPl2crjkvoEnHwKBgQDYJWQr7dn6hJiP40L5oxyHGTsCM2uBNoRr\npFYHCCkdFYieGwU9DhTO4bul0cit8mmpRHdqMTLIGzgEV9BuKRY9jb54zTok8+bi\nr1+OUdCwMtB91rd/B32z21X0jeNRMjARKrXfc60BdbxpV569SOoJVJd/bFcfiuvc\nABTvUYS+dQKBgBl39PprpHtLHMwZOjoYl4sPnjv1VCUyeo/NUVEA0Zc6pTIBW9rE\nwwzZvkGjjqV8cDQ2evni2gNmpHL6VnBFs2kXa2n63QbPPcAWr+haxIGFEoCBlD9n\njjQgNQUsYBdSfX4Uo94iBOpVpS2sM2Y7Fs7pLgQz7Si4p/w+8373FmdRAoGBAKpY\nfaPpZnt7eMkdsLERjfAjQFAxui4xixdSgsIz+kMDr5H7dZtyt498c+jxdpkwjXlr\njjlQ4Na4LOOvWYMYOoD0bwLBq2toFbTdxg9iB3h1877ZM/CXNMhEum9sS5S4Ww2M\nfZ3Hire11HGpLl+7UUddNbCk79zaHZxbLCSYOGfpAoGAG/++s+8IOM1MsaQDlkhJ\ncqHILBrqQKMYhYo8op5/qj5GjHkezJtAH5xRJy7J1/SmdEgi2YBQAicCG8CFiEXG\n65IJuPoCuw4iTlKfbtVzHLHQ6VdNg83vOf3lVH5hTc2MyIwAavtYBdDRv8Aqgtv0\n5iJ8R3DzpPfQ8brYpupWa2M=\n-----END PRIVATE KEY-----\n",
+  "client_email": "credenciais-chatbot@booming-being-453614-q4.iam.gserviceaccount.com",
+  "client_id": "112274452422594320474",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/credenciais-chatbot%40booming-being-453614-q4.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
