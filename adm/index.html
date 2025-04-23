@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UCB - SISTEMA PROTOCOLOS</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="../libraries/dist/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../libraries/dist/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../libraries/dist/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../libraries/dist/css/adminlte.min.css">
+  
+ <!-- <script src='https://www.google.com/recaptcha/api.js'></script>-->
+    <!-- CDN do Font Awesome para o spinner -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+  <script>
+        // Função para verificar se o RA foi preenchido
+        function verificarRA() {
+            var ra = document.getElementById('ra').value;  // Obtém o valor do campo RA
+            var btnEnviar = document.getElementById('btnEnviar'); // Obtém o botão de enviar
+            var form = document.getElementById('meuFormulario'); // Obtém o formulário
+
+            // Habilita ou desabilita o botão com base se o RA foi preenchido
+            if (ra.trim() !== "") {
+                btnEnviar.disabled = false;  // Habilita o botão
+            } else {
+                btnEnviar.disabled = true;  // Desabilita o botão
+            }
+
+            // Event listener para o submit
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Previne o envio do formulário
+
+                // Se o RA não estiver vazio
+                if (ra.trim() !== "") {
+                    // Desabilita o botão e muda o texto para "Aguarde..."
+                    btnEnviar.disabled = true;
+                    btnEnviar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Aguarde...';
+
+                    // Se necessário, faça a ação do formulário aqui. Exemplo:
+                     form.submit(); // Envia o formulário
+                }
+            });
+        }
+
+        window.onload = function() {
+            document.getElementById('ra').addEventListener('input', verificarRA);  // Chama a função sempre que o campo RA é alterado
+        };
+    </script>
+</script>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <!-- /.login-logo -->
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+        <img src="../libraries/dist/img/logo_ucb.png" alt="logo.png" height="60%" width="60%">
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg"><h3 align="center">Acesso Sistema</h3></p>
+
+      <form action="core/2index.php" method="post" id="meuFormulario">
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" placeholder="Digite Seu RA" name="ra" id="ra" required >
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user-graduate"></span>
+            </div>
+          </div>
+        </div>
+       
+            <center>
+              <div class="g-recaptcha" data-sitekey="6Le8DIYjAAAAAP-0lLxZNbseu3SquirzQTgfNvOD"></div>
+            <hr>
+       
+         
+          <!-- /.col -->
+          <div class="col-6">
+            <button type="submit" id="btnEnviar"  class="btn btn-primary btn-block" >Acessar</button>
+          </div>
+          <br>
+          </center>
+      </form>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../libraries/dist/js/adminlte.min.js"></script>
+</body>
+</html>
