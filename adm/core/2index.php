@@ -2,10 +2,10 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
 //receber variavel do ALuno (RA)
-$ra = trim($_POST['ra']);
+$login = trim($_POST['login']);
 
 // Remover espaços em branco no início do texto
-$ra = ltrim($ra);
+$login = ltrim($login);
 
 //criar processo para gerar senha e gravar senha temp np BD
 $keyAluno = rand(1000, 9999);
@@ -23,18 +23,17 @@ if ($conexaoMariaDB) {
   $conexaoMariaDB = null; // Fecha a conexão quando terminar
   exit();
 }
-@include "queryLogin.php";
+$queryA = $conexao->prepare("SELECT login, email, perfil FROM `ACESSO` WHERE login = :login");
+$queryA->bindParam(':login', $login, PDO::PARAM_STR);
 $queryA->execute();
-$resultado = $queryA->fetchAll();
-
-//pegar email do Aluno UCB
+$resultado = $queryA->fetch(PDO::FETCH_ASSOC);
 
 if (!$resultado) {
   echo "...";
   echo "<script>
            Swal.fire({
                icon: 'error',
-               title: 'Aluno não encontrado!',
+               title: 'Usuario não encontrado!',
                text: 'Tente Novamente.',
                confirmButtonText: 'Ok'
               }).then((result) => {
@@ -43,76 +42,51 @@ if (!$resultado) {
                 }
             });
        </script>";
-  // echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=../noIndex.htm'>";
+
   exit();
 } else {
-  $raAluno = $ra;
-  //validar se o Aluno tem protocolos
-  $conexao = conectar("SPROTOCOLOS");
-  $validaProtocoloAluno = $conexao->prepare("
-        select * from [SPROTOCOLOS].[dbo].[PROTOCOLOS] 
-        WHERE 
-            [ra] = :ra ");
 
-  $validaProtocoloAluno->bindParam(':ra', $ra);
+  //usuario existe na base
 
   try {
-    $validaProtocoloAluno->execute();
-    $resultado = $validaProtocoloAluno->fetch(PDO::FETCH_NUM); // Retorna a próxima linha como array numérico
 
-    if ($resultado) {
-      //$emailAluno = $resultado['0']['4'];
-      $emailAluno = "hugo.silva@castelobranco.br";
-      //Grava o dado de acesso
-      try {
-        $conexao = conectar("SPROTOCOLOS");
 
-        $abreProtocolo = "insert into [dbo].[ACESSO]
-                                    ([raAluno]
-                                    ,[keyAluno]
-                                    ,[dataCadastro])
-                                    values( ?, ?, ?)";
+    $emailAluno = $resultado['email'];
+    //Grava o dado de acesso
+    try {
+      $conexao = conectar($nomeBancoDeDados);
 
-        $stmt = $conexao->prepare($abreProtocolo, array(
-          PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY,
-          PDO::SQLSRV_ATTR_QUERY_TIMEOUT => 1
-        ));
+      $acesspTemp = "INSERT INTO acesso_temp
+                              (LOGIN, PASSWORD, DATAINPUT)
+                              VALUES (?, ?, ?)";
 
-        $stmt->execute(array($raAluno, $keyAluno, $dataCadastro));
-        $resultado = $stmt->rowCount();
+      // Prepare a consulta sem atributos específicos do SQL Server
+      $stmt = $conexao->prepare($acesspTemp);
 
-        if ($resultado > 0) {
-          echo "<script>
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Sucesso!',
-                                text: 'A Senha de Acesso foi enviado para Seu email, verifique sua caixa.',
-                                confirmButtonText: 'Ok'
-                            });
-                        </script>";
+      // Executa a query com os parâmetros
+      $stmt->execute(array($login, $keyAluno, $dataCadastro));
 
-          include "envioCodigoAcesso.php";
-        } else {
-          echo "Nenhum dado foi inserido.";
-        }
-      } catch (PDOException $e) {
-        echo "Erro ao conectar ou executar a query: " . $e->getMessage();
-        exit();
+      // Verifica quantas linhas foram afetadas
+      $resultado = $stmt->rowCount();
+
+
+      if ($resultado > 0) {
+        echo "<script>
+                                  Swal.fire({
+                                      icon: 'success',
+                                      title: 'Sucesso!',
+                                      text: 'A Senha de Acesso foi enviado para Seu email, verifique sua caixa.',
+                                      confirmButtonText: 'Ok'
+                                  });
+                              </script>";
+
+        include "envioCodigoAcesso.php";
+      } else {
+        echo "Nenhum dado foi inserido.";
       }
-    } else {
-      echo "...";
-      exit("
-            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-            <script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Aviso Sistema',
-                    text: 'Não foram ecnontrados Protocolos para RA: $ra',
-                    confirmButtonText: 'OK'
-                }).then(() => {
-                    window.location.href = '../index.html';
-                });
-            </script>");
+    } catch (PDOException $e) {
+      echo "Erro ao conectar ou executar a query: " . $e->getMessage();
+      exit();
     }
   } catch (PDOException $e) {
     // echo $e;
@@ -141,7 +115,7 @@ if (!$resultado) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UCB - SISTEMA PROTOCOLO</title>
+    <title>ATENTUS</title>
     <link rel="apple-touch-icon" sizes="180x180" href="../../libraries/dist/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../../libraries/dist/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../libraries/dist/img/favicon-16x16.png">
@@ -210,7 +184,7 @@ if (!$resultado) {
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <img src="../../libraries/dist/img/logo_ucb.png" alt="logo.png" height="60%" width="60%">
+                <!--    <img src="../../libraries/dist/img/logo_ucb.png" alt="logo.png" height="60%" width="60%"> -->
             </div>
             <div class="card-body">
                 <p class="login-box-msg">
@@ -219,7 +193,7 @@ if (!$resultado) {
 
                 <form action="acessPdoSql.php" method="post">
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" value="<?php echo $raAluno; ?>" name="ra" readonly>
+                        <input type="number" class="form-control" value="<?php echo $login; ?>" name="ra" readonly>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user-graduate"></span>
@@ -236,10 +210,7 @@ if (!$resultado) {
                     </div>
 
                     <center>
-                        <div class="g-recaptcha" data-sitekey="6Le8DIYjAAAAAP-0lLxZNbseu3SquirzQTgfNvOD"></div>
                         <hr>
-
-
                         <!-- /.col -->
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary btn-block">Acessar</button>
